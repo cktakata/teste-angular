@@ -5,7 +5,16 @@
  * Autor: Carlos Takata
  */
 
+interface Address {
+  cep: String;
+  logradouro: String;
+  complemento: String;
+  bairro: String;
+  localidade: String;
+  uf: String;
+}
 export default class customer {
-  name: String;
+  nome: String;
   email: String;
+  endereco: Address[];
 }

@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <form [formGroup]="adicionarcustomerForm">
-      <div class="col-md-9 col-md-offset-3">
+      <div class="col-md-12 col-md-offset-3">
 
         <!-- INÍCIO BLOCO: Nome do Funcionário -->
         <div class="form-group">
@@ -30,57 +30,63 @@
           </div>
         </div>
         <!-- FIM BLOCO: Email -->
+        <table width=100%>
+          <tr>
+            <td>
+              <!-- INÍCIO BLOCO: Endereço 1 -->
+              <div class="form-group">
+                <label>CEP Endereço Residencial</label>
+                <input type="text" class="form-control" formControlName="cep1" #cep1 maxlength="8" digitOnly>
+                <label>Logradouro</label>
+                <input type="text" class="form-control" formControlName="logradouro1" #logradouro1 readonly>
+                <label>Complemento</label>
+                <input type="text" class="form-control" formControlName="complemento1" #complemento1 readonly>
+                <label>Bairro</label>
+                <input type="text" class="form-control" formControlName="bairro1" #bairro1 readonly>
+                <label>Localidade</label>
+                <input type="text" class="form-control" formControlName="localidade1" #localidade1 readonly>
+                <label>UF</label>
+                <input type="text" class="form-control" formControlName="uf1" #uf1 readonly>
+              </div>
+              <div *ngIf="adicionarcustomerForm.controls['cep1'].invalid
+&& (adicionarcustomerForm.controls['cep1'].dirty
+|| adicionarcustomerForm.controls['cep1'].touched)" class="alert alert-danger">
+                <div *ngIf="adicionarcustomerForm.controls['cep1'].errors.required">
+                  O campo 'CEP Endereço Residencial' é obrigatório.
+                </div>
+              </div>
+              <!-- FIM BLOCO: Endereço 1 -->
+            </td>
+            <td>
+              <!-- INÍCIO BLOCO: Endereço 2 -->
+              <div class="form-group">
+                <label>CEP Endereço Comercial</label>
+                <input type="text" class="form-control" formControlName="cep2" #cep2 maxlength="8" digitOnly>
+                <label>Logradouro</label>
+                <input type="text" class="form-control" formControlName="logradouro2" #logradouro2 readonly>
+                <label>Complemento</label>
+                <input type="text" class="form-control" formControlName="complemento2" #complemento2 readonly>
+                <label>Bairro</label>
+                <input type="text" class="form-control" formControlName="bairro2" #bairro2 readonly>
+                <label>Localidade</label>
+                <input type="text" class="form-control" formControlName="localidade2" #localidade2 readonly>
+                <label>UF</label>
+                <input type="text" class="form-control" formControlName="uf2" #uf2 readonly>
+              </div>
+              <div *ngIf="adicionarcustomerForm.controls['cep2'].invalid
+&& (adicionarcustomerForm.controls['cep2'].dirty
+|| adicionarcustomerForm.controls['cep2'].touched)" class="alert alert-danger">
+                <div *ngIf="adicionarcustomerForm.controls['cep2'].errors.required">
+                  O campo 'CEP Endereço Comercial' é obrigatório.
+                </div>
+              </div>
+              <!-- FIM BLOCO: Endereço 2 -->
+            </td>
+          </tr>
+        </table>
 
-        <!-- INÍCIO BLOCO: Endereço 1 -->
         <div class="form-group">
-          <label>CEP Endereço Residencial</label>
-          <input type="text" class="form-control" formControlName="endereco1" #email maxlength="8" digitOnly>
-          <label>Logradouro</label>
-          <input type="text" class="form-control" formControlName="logradouro" #logradouro readonly>
-          <label>Complemento</label>
-          <input type="text" class="form-control" formControlName="complemento" #complemento readonly>
-          <label>Bairro</label>
-          <input type="text" class="form-control" formControlName="bairro" #bairro readonly>
-          <label>Localidade</label>
-          <input type="text" class="form-control" formControlName="localidade" #localidade readonly>
-          <label>UF</label>
-          <input type="text" class="form-control" formControlName="uf" #uf readonly>
-        </div>
-        <div *ngIf="adicionarcustomerForm.controls['endereco1'].invalid
-    && (adicionarcustomerForm.controls['endereco1'].dirty
-    || adicionarcustomerForm.controls['endereco1'].touched)" class="alert alert-danger">
-          <div *ngIf="adicionarcustomerForm.controls['endereco1'].errors.required">
-            O campo 'CEP Endereço Residencial' é obrigatório.
-          </div>
-        </div>
-        <!-- FIM BLOCO: Endereço 1 -->
-
-        <!-- INÍCIO BLOCO: Endereço 2 -->
-        <div class="form-group">
-          <label>CEP Endereço Comercial</label>
-          <input type="text" class="form-control" formControlName="endereco1" #email maxlength="8" digitOnly>
-          <label>Logradouro</label>
-          <input type="text" class="form-control" formControlName="logradouro" #logradouro readonly>
-          <label>Complemento</label>
-          <input type="text" class="form-control" formControlName="complemento" #complemento readonly>
-          <label>Bairro</label>
-          <input type="text" class="form-control" formControlName="bairro" #bairro readonly>
-          <label>Localidade</label>
-          <input type="text" class="form-control" formControlName="localidade" #localidade readonly>
-          <label>UF</label>
-          <input type="text" class="form-control" formControlName="uf" #uf readonly>
-        </div>
-        <div *ngIf="adicionarcustomerForm.controls['endereco1'].invalid
-    && (adicionarcustomerForm.controls['endereco1'].dirty
-    || adicionarcustomerForm.controls['endereco1'].touched)" class="alert alert-danger">
-          <div *ngIf="adicionarcustomerForm.controls['endereco1'].errors.required">
-            O campo 'CEP Endereço Comercial' é obrigatório.
-          </div>
-        </div>
-        <!-- FIM BLOCO: Endereço 2 -->
-
-        <div class="form-group">
-          <button (click)="adicionarcustomer(nomecustomer.value, cargo.value, numeroIdentificador.value)"
+          <button (click)="adicionarcustomer(nomecustomer.value, email.value, numeroIdentificador.value)"
             class="btn btn-primary" [disabled]="adicionarcustomerForm.pristine || adicionarcustomerForm.invalid">
             <fa name="plus"></fa> Add
           </button>
