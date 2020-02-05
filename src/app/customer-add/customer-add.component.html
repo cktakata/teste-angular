@@ -6,7 +6,7 @@
         <!-- INÍCIO BLOCO: Nome do Funcionário -->
         <div class="form-group">
           <label>Nome</label>
-          <input type="text" class="form-control" formControlName="nomecustomer" #nomecustomer>
+          <input type="text" class="form-control" formControlName="nomecustomer" #nomecustomer tabindex=1>
         </div>
         <div *ngIf="adicionarcustomerForm.controls['nomecustomer'].invalid
               && (adicionarcustomerForm.controls['nomecustomer'].dirty
@@ -20,13 +20,16 @@
         <!-- INÍCIO BLOCO: Email -->
         <div class="form-group">
           <label>Email</label>
-          <input type="text" class="form-control" formControlName="email" #email>
+          <input type="text" class="form-control" formControlName="email" #email tabindex=2>
         </div>
         <div *ngIf="adicionarcustomerForm.controls['email'].invalid
               && (adicionarcustomerForm.controls['email'].dirty
               || adicionarcustomerForm.controls['email'].touched)" class="alert alert-danger">
           <div *ngIf="adicionarcustomerForm.controls['email'].errors.required">
             O campo 'Email' é obrigatório.
+          </div>
+          <div *ngIf="adicionarcustomerForm.controls['email'].errors.email">
+            O campo 'Email' é inválido.
           </div>
         </div>
         <!-- FIM BLOCO: Email -->
@@ -36,7 +39,7 @@
               <!-- INÍCIO BLOCO: Endereço 1 -->
               <div class="form-group">
                 <label>CEP Endereço Residencial</label>
-                <input type="text" class="form-control" formControlName="cep1" #cep1 maxlength="8" digitOnly>
+                <input type="text" class="form-control" formControlName="cep1" #cep1 maxlength="8" digitOnly tabindex=3>
                 <label>Logradouro</label>
                 <input type="text" class="form-control" formControlName="logradouro1" #logradouro1 readonly>
                 <label>Complemento</label>
@@ -61,7 +64,7 @@
               <!-- INÍCIO BLOCO: Endereço 2 -->
               <div class="form-group">
                 <label>CEP Endereço Comercial</label>
-                <input type="text" class="form-control" formControlName="cep2" #cep2 maxlength="8" digitOnly>
+                <input type="text" class="form-control" formControlName="cep2" #cep2 maxlength="8" digitOnly tabindex=4>
                 <label>Logradouro</label>
                 <input type="text" class="form-control" formControlName="logradouro2" #logradouro2 readonly>
                 <label>Complemento</label>
@@ -86,8 +89,8 @@
         </table>
 
         <div class="form-group">
-          <button (click)="adicionarcustomer(nomecustomer.value, email.value, numeroIdentificador.value)"
-            class="btn btn-primary" [disabled]="adicionarcustomerForm.pristine || adicionarcustomerForm.invalid">
+          <button (click)="adicionarcustomer(adicionarcustomerForm)" class="btn btn-primary"
+            [disabled]="adicionarcustomerForm.pristine || adicionarcustomerForm.invalid">
             <fa name="plus"></fa> Add
           </button>
         </div>

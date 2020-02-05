@@ -23,7 +23,7 @@ export class CustomerAddComponent implements OnInit {
   createForm() {
     this.adicionarcustomerForm = this.formBuilder.group({
       nomecustomer: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       cep1: ['', Validators.required],
       logradouro1: [''],
       complemento1: [''],
@@ -39,8 +39,8 @@ export class CustomerAddComponent implements OnInit {
     });
 
     this.adicionarcustomerForm.controls['cep1'].valueChanges.subscribe(
-      (value: string) => {
-        if (value.length >= 8) {
+      (value: any) => {
+        if (value.length >= 8 && !isNaN(value)) {
           this.customerService.getCep(value).subscribe((data: any) => {
             this.adicionarcustomerForm.controls['logradouro1'].setValue(data.logradouro);
             this.adicionarcustomerForm.controls['complemento1'].setValue(data.complemento);
@@ -53,8 +53,8 @@ export class CustomerAddComponent implements OnInit {
     );
 
     this.adicionarcustomerForm.controls['cep2'].valueChanges.subscribe(
-      (value: string) => {
-        if (value.length >= 8) {
+      (value: any) => {
+        if (value.length >= 8 && !isNaN(value)) {
           this.customerService.getCep(value).subscribe((data: any) => {
             this.adicionarcustomerForm.controls['logradouro2'].setValue(data.logradouro);
             this.adicionarcustomerForm.controls['complemento2'].setValue(data.complemento);
@@ -72,29 +72,31 @@ export class CustomerAddComponent implements OnInit {
    * Método responsável por adicionar um novo 'Customer' com ação do btn 'Add':
    */
   // tslint:disable-next-line: max-line-length
-  adicionarcustomer(nomecustomer, email, cep1, logradouro1, complemento1, bairro1, localidade1, uf1, cep2, logradouro2, complemento2, bairro2, localidade2, uf2, ) {
+  adicionarcustomer(form) {
+    console.log(form.controls)
     const obj = new customer();
-    obj.nome = nomecustomer;
-    obj.email = email;
+    obj.nome = form.controls['nomecustomer'].value;
+    obj.email = form.controls['email'].value;
+    obj.endereco = [];
     const endereco1 = {
-      cep: cep1,
-      logradouro: logradouro1,
-      complemento: complemento1,
-      bairro: bairro1,
-      localidade: localidade1,
-      uf: uf1
-    };
+      cep: form.controls['cep1'].value,
+      logradouro: form.controls['logradouro1'].value,
+      complemento: form.controls['complemento1'].value,
+      bairro: form.controls['bairro1'].value,
+      localidade: form.controls['localidade1'].value,
+      uf: form.controls['uf1'].value
+    }
     obj.endereco.push(endereco1);
     const endereco2 = {
-      cep: cep2,
-      logradouro: logradouro2,
-      complemento: complemento2,
-      bairro: bairro2,
-      localidade: localidade2,
-      uf: uf2
-    };
+      cep: form.controls['cep2'].value,
+      logradouro: form.controls['logradouro2'].value,
+      complemento: form.controls['complemento2'].value,
+      bairro: form.controls['bairro2'].value,
+      localidade: form.controls['localidade2'].value,
+      uf: form.controls['uf2'].value
+    }
     obj.endereco.push(endereco2);
-    this.customerService.adicionarcustomer(nomecustomer, email, obj);
+    this.customerService.adicionarcustomer(obj);
   }
 
   ngOnInit() {

@@ -14,13 +14,13 @@ export class customerService {
   constructor(private http: HttpClient) { }
 
   // Método responsável por adicionar um novo 'Customer' btn 'Add':
-  adicionarcustomer(nomecustomer, email, obj) {
+  adicionarcustomer(obj) {
     const objcustomer = {
       customer: {
-        name: nomecustomer,
-        email
+        name: obj.nome,
+        email: obj.email
       },
-      addressList: obj
+      addressList: obj.endereco
     };
     console.log(objcustomer);
 
